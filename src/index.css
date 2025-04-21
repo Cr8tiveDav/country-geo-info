@@ -391,6 +391,7 @@ form svg {
   border-radius: var(--borderRadius-md);
 }
 .card .img {
+  height: 160px;
   border-top-left-radius: var(--borderRadius-md);
   border-top-right-radius: var(--borderRadius-md);
 }
