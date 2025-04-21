@@ -3,14 +3,10 @@ import Navbar from './components/Navbar';
 
 const App = () => {
   return (
-    <>
-      <header>
-        <Navbar />
-      </header>
-      <main>
-        <Countries />
-      </main>
-    </>
+    <main>
+      <Navbar />
+      <Countries />
+    </main>
   );
 };
 export default App;

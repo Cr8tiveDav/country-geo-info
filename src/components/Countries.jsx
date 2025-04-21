@@ -39,7 +39,7 @@ const Countries = () => {
     }),
   };
   return (
-    <section>
+    <section className='countries-container'>
       <form action=''>
         <FaSearch />
         <input

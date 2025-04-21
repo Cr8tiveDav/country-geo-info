@@ -293,17 +293,6 @@ body {
 
   font-weight: 400;
   line-height: 1;
-  /* color: var(--textColor); */
-}
-
-/*
-===============
-Main
-===============
-*/
-main {
-  width: var(--view-width);
-  margin: 0 auto;
 }
 
 /*
@@ -312,12 +301,16 @@ Navbar
 ===============
 */
 .nav-container {
+  position: fixed;
+  top: 0;
+  width: 100vw;
   height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--white);
   box-shadow: var(--shadow-2);
+  z-index: 10;
 }
 .nav-center {
   width: var(--view-width);
@@ -344,18 +337,25 @@ Navbar
   font-size: 1.2rem;
 }
 
+/* flex: 1;
+border: 1px solid red; */
 /*
-  ===============
-  Countries
-  ===============
-  */
+===============
+Countries
+===============
+*/
+.countries-container {
+  padding-top: 4rem;
+  width: var(--view-width);
+  margin: 0 auto;
+  position: relative;
+}
 form {
   /* width: var(--view-width);
   margin: 0 auto; */
   margin-top: 2.5rem;
   display: flex;
   align-items: center;
-  position: relative;
 }
 form svg {
   position: absolute;
