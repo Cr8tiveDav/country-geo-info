@@ -1,4 +1,16 @@
+import Countries from './components/Countries';
+import Navbar from './components/Navbar';
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <Countries />
+      </main>
+    </>
+  );
 };
 export default App;
