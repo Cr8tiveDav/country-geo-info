@@ -2,8 +2,10 @@ import Select, { components } from 'react-select';
 import data from '../data';
 import Country from './Country';
 import SearchBar from './SearchBar';
+import { useGlobalContext } from '../context';
 
 const Countries = () => {
+  const { regionFilter } = useGlobalContext();
   const region = data.map((country) => {
     const { region: countryRegion } = country;
     return countryRegion;
@@ -33,6 +35,7 @@ const Countries = () => {
         options={options}
         components={{ Placeholder: CustomPlaceholder }}
         styles={optionStyles}
+        onChange={(option) => regionFilter(option.value)}
       />
       <Country />
     </section>

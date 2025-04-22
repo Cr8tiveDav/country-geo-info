@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 import { useGlobalContext } from './context';
 import reducer from './reducer';
 import { SET_INPUT, FORM_SUBMIT, SET_DATA } from './action';
-import data from './data';
 
 const initialState = {
   input: '',
@@ -12,7 +11,7 @@ const InputContext = createContext();
 
 const InputProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { countries, dispatch: appDispatch } = useGlobalContext();
+  const { countries, data, dispatch: appDispatch } = useGlobalContext();
 
   // Updates input
   const handleInput = (e) => {

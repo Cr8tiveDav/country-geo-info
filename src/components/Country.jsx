@@ -15,6 +15,7 @@ const Country = () => {
           region,
           capital,
         } = country;
+
         return (
           <article className='card' key={nanoid()}>
             <img src={svg} alt='' className='img' />
@@ -27,7 +28,7 @@ const Country = () => {
                 <span>region:</span> {region}
               </p>
               <p>
-                <span>capital:</span> {capital}
+                <span>capital:</span> {capital ?? 'Not Available'}
               </p>
             </div>
           </article>
