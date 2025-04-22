@@ -1,24 +1,20 @@
 import { createContext, useContext, useReducer } from 'react';
 import reducer from './reducer';
 import data from './data';
-import { TOGGLE_MODE, INPUT } from './action';
+import { TOGGLE_MODE } from './action';
 
 const defaultState = {
   isDarkMode: false,
+  data: data,
   countries: data,
-  input: '',
 };
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
-  // Updates input
-  const handleInput = (e) => {
-    dispatch({ type: INPUT, payload: { e } });
-  };
   return (
-    <AppContext.Provider value={{ ...state, handleInput }}>
+    <AppContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AppContext.Provider>
   );

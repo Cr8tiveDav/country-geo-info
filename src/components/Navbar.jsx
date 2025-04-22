@@ -1,6 +1,7 @@
 import { MdOutlineLightMode } from 'react-icons/md';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { useGlobalContext } from '../context';
+import { memo } from 'react';
 
 const Navbar = () => {
   const { isDarkMode } = useGlobalContext();
@@ -22,4 +23,4 @@ const Navbar = () => {
     </nav>
   );
 };
-export default Navbar;
+export default memo(Navbar);

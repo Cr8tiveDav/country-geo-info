@@ -1,21 +1,9 @@
-import { useGlobalContext } from '../context';
-import { FaSearch } from 'react-icons/fa';
 import Select, { components } from 'react-select';
 import data from '../data';
 import Country from './Country';
-import { nanoid } from 'nanoid';
-
-export const CustomPlaceholder = (props) => {
-  return (
-    <components.Placeholder {...props}>
-      <span>Filter by Region</span>
-    </components.Placeholder>
-  );
-};
+import SearchBar from './SearchBar';
 
 const Countries = () => {
-  const { input, handleInput } = useGlobalContext();
-
   const region = data.map((country) => {
     const { region: countryRegion } = country;
     return countryRegion;
@@ -40,28 +28,22 @@ const Countries = () => {
   };
   return (
     <section className='countries-container'>
-      <form action=''>
-        <FaSearch />
-        <input
-          type='text'
-          name='text'
-          id='text'
-          className='search-input'
-          placeholder='Search for a country...'
-          value={input}
-          onChange={handleInput}
-        />
-      </form>
+      <SearchBar />
       <Select
         options={options}
         components={{ Placeholder: CustomPlaceholder }}
         styles={optionStyles}
       />
-      {data.map((country) => {
-        const id = nanoid();
-        return <Country country={country} key={id} />;
-      })}
+      <Country />
     </section>
   );
 };
 export default Countries;
+
+export const CustomPlaceholder = (props) => {
+  return (
+    <components.Placeholder {...props}>
+      <span>Filter by Region</span>
+    </components.Placeholder>
+  );
+};
