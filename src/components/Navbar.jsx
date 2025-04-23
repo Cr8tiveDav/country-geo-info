@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <nav className='nav-container'>
       <div className='nav-center'>
-        <h5>Where is the world?</h5>
+        <h5>Where in the world?</h5>
 
         {isDarkMode ? (
           <button type='button' className='mode-btn'>
