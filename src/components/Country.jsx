@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { useGlobalContext } from '../context';
 
 const Country = () => {
-  const { countries } = useGlobalContext();
+  const { countries, displayCountryDetails } = useGlobalContext();
 
   return (
     <>
@@ -17,7 +17,11 @@ const Country = () => {
         } = country;
 
         return (
-          <article className='card' key={nanoid()}>
+          <article
+            className='card'
+            key={nanoid()}
+            onClick={() => displayCountryDetails(name)}
+          >
             <img src={svg} alt='' className='img' />
             <div className='content'>
               <h4>{name}</h4>

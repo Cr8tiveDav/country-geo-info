@@ -1,4 +1,11 @@
-import { SET_INPUT, FORM_SUBMIT, SET_DATA, FILTER_REGION } from './action';
+import {
+  SET_INPUT,
+  FORM_SUBMIT,
+  SET_DATA,
+  FILTER_REGION,
+  COUNTRY_DETAILS,
+  CLOSE_DETAILS,
+} from './action';
 
 const reducer = (state, action) => {
   if (action.type === SET_INPUT) {
@@ -29,6 +36,19 @@ const reducer = (state, action) => {
       (country) => country.region === region
     );
     return { ...state, countries: countriesByRegion };
+  }
+  // Displays country's details
+  if (action.type === COUNTRY_DETAILS) {
+    // Fetches country's obj by the name
+    const countryItem = state.data.find(
+      (country) => country.name === action.payload.name
+    );
+    return { ...state, isCardOpen: true, countryDetails: countryItem };
+  }
+  // Close country's details
+  if (action.type === CLOSE_DETAILS) {
+    // Closes country's and route back to home
+    return { ...state, isCardOpen: false };
   }
   throw new Error(`No matching action type: ${action.type}`);
 };
