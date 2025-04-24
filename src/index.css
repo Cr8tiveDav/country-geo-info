@@ -443,6 +443,16 @@ CountryDetails
   min-height: calc(100vh - 5rem);
   padding: 1.5rem 0;
 }
+.back-btn {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+}
+.back-btn svg {
+  margin-right: 0.3rem;
+}
 .details-center img {
   width: 100%;
   object-fit: cover;
@@ -459,4 +469,24 @@ CountryDetails
 }
 .details-center .content p:nth-of-type(-n + 8) {
   margin-bottom: 0.75rem;
+}
+
+.borders {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.details-btn {
+  background: transparent;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--borderRadius-sm);
+  color: var(--dark-gray);
+  font-size: 0.75rem;
+  padding: 0.4375rem 0.75rem;
+  text-transform: capitalize;
+  box-shadow: var(--shadow-2);
+  cursor: pointer;
+}
+.details-btn:hover {
+  box-shadow: var(--shadow-3);
 }

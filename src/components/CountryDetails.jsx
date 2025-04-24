@@ -1,5 +1,6 @@
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { useGlobalContext } from '../context';
+import { nanoid } from 'nanoid';
 
 const CountryDetails = () => {
   const { isCardOpen, countryDetails, closeCountryDetails } =
@@ -26,7 +27,11 @@ const CountryDetails = () => {
       {isCardOpen && (
         <section className='section-details'>
           <article className='details-center'>
-            <button type='button' onClick={closeCountryDetails}>
+            <button
+              type='button'
+              onClick={closeCountryDetails}
+              className='details-btn back-btn'
+            >
               <FaArrowLeftLong />
               back
             </button>
@@ -47,7 +52,7 @@ const CountryDetails = () => {
               <p>
                 <span>sub region:</span> {subregion}
               </p>
-              <p>
+              <p style={{ marginBottom: '2rem' }}>
                 <span>capital:</span> {capital}
               </p>
 
@@ -57,13 +62,33 @@ const CountryDetails = () => {
               <p>
                 <span>currencies: {currency}</span>
               </p>
-              <p>
+
+              <p style={{ marginBottom: '2rem' }}>
                 <span>languages:</span>
+                {languages.map((language) => {
+                  const { name } = language;
+                  return <span key={nanoid()}> {name},</span>;
+                })}
               </p>
 
-              <p>
-                <span>border countries:</span>
-              </p>
+              <section className='border-container'>
+                <p>
+                  <span>border countries:</span>
+                </p>
+                <div className='borders ' style={{ marginTop: '1rem' }}>
+                  {borders.map((border) => {
+                    return (
+                      <button
+                        type='button'
+                        className='details-btn'
+                        key={nanoid()}
+                      >
+                        {border}
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
             </div>
           </article>
         </section>
