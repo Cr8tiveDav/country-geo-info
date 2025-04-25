@@ -1,4 +1,5 @@
 import {
+  TOGGLE_THEME,
   SET_INPUT,
   FORM_SUBMIT,
   SET_DATA,
@@ -49,6 +50,11 @@ const reducer = (state, action) => {
   if (action.type === CLOSE_DETAILS) {
     // Closes country's and route back to home
     return { ...state, isCardOpen: false };
+  }
+  // Toggles the application theme
+  if (action.type === TOGGLE_THEME) {
+    const themeMode = state.isDarkMode;
+    return { ...state, isDarkMode: !themeMode };
   }
   throw new Error(`No matching action type: ${action.type}`);
 };

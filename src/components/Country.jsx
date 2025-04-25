@@ -26,13 +26,15 @@ const Country = () => {
             <div className='content'>
               <h4>{name}</h4>
               <p>
-                <span>population:</span> {population.toLocaleString()}
+                <strong>population:</strong>{' '}
+                <span>{population.toLocaleString()}</span>
               </p>
               <p>
-                <span>region:</span> {region}
+                <strong>region:</strong> <span>{region}</span>
               </p>
               <p>
-                <span>capital:</span> {capital ?? 'Not Available'}
+                <strong>capital:</strong>{' '}
+                <span>{capital ?? 'Not Available'}</span>
               </p>
             </div>
           </article>

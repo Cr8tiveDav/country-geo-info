@@ -41,42 +41,49 @@ const CountryDetails = () => {
             <div className='content'>
               <h4>{name}</h4>
               <p>
-                <span>native name:</span> {nativeName}
+                <strong>native name:</strong> <span>{nativeName}</span>
               </p>
               <p>
-                <span>population:</span> {population.toLocaleString()}
+                <strong>population:</strong>{' '}
+                <span>{population.toLocaleString()}</span>
               </p>
               <p>
-                <span>region:</span> {region}
+                <strong>region:</strong> <span>{region}</span>
               </p>
               <p>
-                <span>sub region:</span> {subregion}
+                <strong>sub region:</strong> <span>{subregion}</span>
               </p>
               <p style={{ marginBottom: '2rem' }}>
-                <span>capital:</span> {capital}
+                <strong>capital:</strong> <span>{capital}</span>
               </p>
 
               <p>
-                <span>top level domain:</span> {topLevelDomain}
+                <strong>top level domain:</strong> <span>{topLevelDomain}</span>
               </p>
               <p>
-                <span>currencies: {currency}</span>
+                <strong>currencies:</strong> <span>{currency}</span>
               </p>
 
               <p style={{ marginBottom: '2rem' }}>
-                <span>languages:</span>
-                {languages.map((language) => {
+                <strong>languages:</strong>
+                {languages.map((language, index) => {
                   const { name } = language;
-                  return <span key={nanoid()}> {name},</span>;
+                  return (
+                    <span key={nanoid()}>
+                      {' '}
+                      {name}
+                      {index < languages.length - 1 && ','}
+                    </span>
+                  );
                 })}
               </p>
 
               <section className='border-container'>
                 <p>
-                  <span>border countries:</span>
+                  <strong>border countries:</strong>
                 </p>
                 <div className='borders ' style={{ marginTop: '1rem' }}>
-                  {borders.map((border) => {
+                  {borders?.map((border) => {
                     return (
                       <button
                         type='button'
@@ -86,7 +93,7 @@ const CountryDetails = () => {
                         {border}
                       </button>
                     );
-                  })}
+                  }) || 'None'}
                 </div>
               </section>
             </div>

@@ -294,6 +294,42 @@ body {
   font-weight: 400;
   line-height: 1;
 }
+/* ===== Dark Mode ===== */
+body.dark-mode {
+  background: var(--very-dark-blue-bg);
+  color: var(--very-light-gray-bg);
+}
+/* body.dark-mode .region-select {
+  color: var(--very-light-gray-bg);
+} */
+body.dark-mode .countries-container {
+  background: var(--very-dark-blue-bg);
+}
+body.dark-mode .nav-container,
+body.dark-mode .mode-btn,
+body.dark-mode .search-input,
+body.dark-mode form svg,
+body.dark-mode .search-input::placeholder,
+body.dark-mode .card .content {
+  background: var(--dark-blue);
+  color: var(--white);
+}
+body.dark-mode .card .content span:not(p) {
+  color: var(--light-gray);
+}
+
+body.dark-mode .section-details {
+  background: var(--very-dark-blue-bg);
+  color: var(--white);
+}
+body.dark-mode .section-details span:not(p) {
+  color: var(--light-gray);
+}
+body.dark-mode .details-btn {
+  background: var(--dark-blue);
+  color: var(--light-gray);
+  border: none;
+}
 
 /*
 ===============
@@ -318,6 +354,7 @@ Navbar
   align-items: center;
   justify-content: center;
   background: var(--white);
+  color: var(--very-dark-blue-text);
   box-shadow: var(--shadow-2);
   z-index: 10;
 }
@@ -329,7 +366,6 @@ Navbar
 .nav-center h5 {
   font-size: 1.15rem;
   font-weight: var(--weight-extraBold);
-  color: var(--very-dark-blue-text);
 }
 .mode-btn {
   display: flex;
@@ -388,6 +424,10 @@ form svg {
   border: none;
   box-shadow: var(--shadow-2);
 }
+.search-input:focus {
+  outline: none;
+  border: 2px solid #2684ff;
+}
 .search-input::placeholder {
   font-size: 1rem;
   color: var(--light-gray);
@@ -406,6 +446,7 @@ form svg {
   border-radius: var(--borderRadius-md);
 }
 .card .img {
+  width: 100%;
   height: 160px;
   border-top-left-radius: var(--borderRadius-md);
   border-top-right-radius: var(--borderRadius-md);
@@ -413,11 +454,14 @@ form svg {
 .card .content {
   padding: 2rem 1.5rem;
   color: var(--very-dark-blue-text);
+  background: var(--very-light-gray-bg);
+  border-bottom-left-radius: var(--borderRadius-md);
+  border-bottom-right-radius: var(--borderRadius-md);
 }
 .card .content h4 {
   margin-bottom: 1rem;
 }
-.card .content p span {
+.card .content p strong {
   text-transform: capitalize;
   font-weight: var(--weight-semiBold);
 }

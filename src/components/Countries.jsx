@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import { useGlobalContext } from '../context';
 
 const Countries = () => {
-  const { regionFilter } = useGlobalContext();
+  const { isDarkMode, regionFilter } = useGlobalContext();
   const region = data.map((country) => {
     const { region: countryRegion } = country;
     return countryRegion;
@@ -21,11 +21,14 @@ const Countries = () => {
       width: '60%',
       marginTop: '2rem',
       paddingLeft: '.5rem',
+      background: isDarkMode ? '#2b3945' : '#ffffff',
+      // borderColor: isDarkMode ? 'transparent' : '',
     }),
     menu: (baseStyles, _state) => ({
       ...baseStyles,
       width: '60%',
       padding: '.75rem .5rem',
+      background: isDarkMode ? '#2b3945' : '#ffffff',
     }),
   };
   return (
@@ -35,6 +38,7 @@ const Countries = () => {
         options={options}
         components={{ Placeholder: CustomPlaceholder }}
         styles={optionStyles}
+        className='region-select'
         onChange={(option) => regionFilter(option.value)}
       />
       <Country />

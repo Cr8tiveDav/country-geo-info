@@ -1,8 +1,8 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import reducer from './reducer';
 import data from './data';
 import {
-  TOGGLE_MODE,
+  TOGGLE_THEME,
   FILTER_REGION,
   COUNTRY_DETAILS,
   CLOSE_DETAILS,
@@ -20,24 +20,36 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
-  // Filter country by region
+  // Filters country by region
   const regionFilter = (value) => {
     dispatch({ type: FILTER_REGION, payload: { value } });
   };
 
-  // Display country details
+  // Displays country details
   const displayCountryDetails = (name) => {
     dispatch({ type: COUNTRY_DETAILS, payload: { name } });
     console.log('Card is Open');
     console.log(name);
   };
+  console.log(state.countryDetails);
 
-  // Close country details
+  // Closes country details
   const closeCountryDetails = () => {
     dispatch({ type: CLOSE_DETAILS });
   };
-  console.log(state.isCardOpen);
-  console.log(state.countryDetails);
+
+  // Toggles theme mode
+  const toggleTheme = () => {
+    console.log('mode toggled');
+    dispatch({ type: TOGGLE_THEME });
+  };
+
+  useEffect(() => {
+    if (state.isDarkMode) {
+      document.querySelector('body').classList.add('dark-mode');
+    }
+  }, [state.isDarkMode]);
+  console.log(state.isDarkMode);
 
   return (
     <AppContext.Provider
@@ -47,6 +59,7 @@ const AppProvider = ({ children }) => {
         regionFilter,
         displayCountryDetails,
         closeCountryDetails,
+        toggleTheme,
       }}
     >
       {children}
