@@ -45,9 +45,7 @@ const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (state.isDarkMode) {
-      document.querySelector('body').classList.add('dark-mode');
-    }
+    document.querySelector('body').classList.toggle('dark-mode');
   }, [state.isDarkMode]);
   console.log(state.isDarkMode);
 

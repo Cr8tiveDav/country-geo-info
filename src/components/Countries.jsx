@@ -22,13 +22,46 @@ const Countries = () => {
       marginTop: '2rem',
       paddingLeft: '.5rem',
       background: isDarkMode ? '#2b3945' : '#ffffff',
-      // borderColor: isDarkMode ? 'transparent' : '',
+      borderColor: 'transparent',
+      boxShadow: '0 1px 2px 1px rgba(0,0,0,0.2)',
+    }),
+    singleValue: (baseStyles, state) => ({
+      ...baseStyles,
+      color: isDarkMode ? '#9e9e9e' : '',
     }),
     menu: (baseStyles, _state) => ({
       ...baseStyles,
       width: '60%',
       padding: '.75rem .5rem',
       background: isDarkMode ? '#2b3945' : '#ffffff',
+    }),
+    option: (baseStyles, state) => ({
+      ...baseStyles,
+      background: state.isSelected
+        ? `${
+            isDarkMode
+              ? `${state.isSelected ? '#2684ff' : '#2b3945'}`
+              : `${state.isSelected ? '#2684ff' : '#2684ff'}`
+          }`
+        : state.isFocused
+        ? `${
+            isDarkMode
+              ? `${state.isFocused ? '#deebff' : ''}`
+              : `${state.isFocused ? '#deebff' : '#fff'}`
+          }`
+        : isDarkMode
+        ? '#2b3945'
+        : '#fff',
+      color: isDarkMode
+        ? `${state.isFocused ? '#333' : ''}`
+        : `${state.isFocused ? '#333' : ''}`,
+
+      // background: isDarkMode
+      //   ? `${state.isSelected ? '#2684ff' : '#2b3945'}`
+      //   : `${state.isSelected ? '#2684ff' : '#2684ff'}`,
+      // backgroundColor: isDarkMode
+      //   ? `${state.isFocused ? '#f0f0f0' : ''}`
+      //   : `${state.isFocused ? '#deebff' : '#fff'}`,
     }),
   };
   return (
