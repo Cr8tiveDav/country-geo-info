@@ -44,10 +44,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: TOGGLE_THEME });
   };
 
-  useEffect(() => {
-    document.querySelector('body').classList.toggle('dark-mode');
-  }, [state.isDarkMode]);
-  console.log(state.isDarkMode);
+  // useEffect(() => {
+  // document.querySelector('body').classList.toggle('dark-mode');
+  // }, [state.isDarkMode]);
+  // console.log(state.isDarkMode);
 
   return (
     <AppContext.Provider
