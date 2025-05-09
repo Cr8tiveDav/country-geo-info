@@ -8,10 +8,10 @@ import {
   CLOSE_DETAILS,
 } from './action';
 
-// Get browser's preferred theme
+// Get browser's preferred/locally stored theme
 const getInitialDarkMode = () => {
   const prefersDarkMode = window.matchMedia(
-    'prefers-color-scheme:dark'
+    '(prefers-color-scheme:dark)'
   ).matches;
 
   // Get the value of dark theme from local storage
@@ -48,11 +48,7 @@ const AppProvider = ({ children }) => {
   // Displays country details
   const displayCountryDetails = (name) => {
     dispatch({ type: COUNTRY_DETAILS, payload: { name } });
-    console.log('Card is Open');
-    console.log(name);
   };
-  console.log(state.countryDetails);
-  console.log(state.isDarkMode);
 
   // Closes country details
   const closeCountryDetails = () => {
@@ -61,7 +57,6 @@ const AppProvider = ({ children }) => {
 
   // Toggles theme mode
   const toggleTheme = () => {
-    console.log('theme toggled');
     dispatch({ type: TOGGLE_THEME });
   };
 
