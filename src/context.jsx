@@ -8,7 +8,20 @@ import {
   CLOSE_DETAILS,
 } from './action';
 
-const defaultState = {
+// Get browser's preferred theme
+const getInitialDarkMode = () => {
+  const prefersDarkMode = window.matchMedia(
+    'prefers-color-scheme:dark'
+  ).matches;
+
+  // Get the value of dark theme from local storage
+  // Compare if it's ==='true'. Returns a boolean
+  const storedDarkMode = localStorage.getItem('darkMode') === 'true';
+
+  return storedDarkMode || prefersDarkMode;
+};
+
+const initialState = {
   isDarkMode: false,
   data: data,
   countries: data,
@@ -18,7 +31,14 @@ const defaultState = {
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, defaultState);
+  const [state, dispatch] = useReducer(
+    reducer,
+    initialState,
+    (initialState) => ({
+      ...initialState,
+      isDarkMode: getInitialDarkMode(),
+    })
+  );
 
   // Filters country by region
   const regionFilter = (value) => {
@@ -32,6 +52,7 @@ const AppProvider = ({ children }) => {
     console.log(name);
   };
   console.log(state.countryDetails);
+  console.log(state.isDarkMode);
 
   // Closes country details
   const closeCountryDetails = () => {
@@ -40,14 +61,13 @@ const AppProvider = ({ children }) => {
 
   // Toggles theme mode
   const toggleTheme = () => {
-    console.log('mode toggled');
+    console.log('theme toggled');
     dispatch({ type: TOGGLE_THEME });
   };
 
-  // useEffect(() => {
-  // document.querySelector('body').classList.toggle('dark-mode');
-  // }, [state.isDarkMode]);
-  // console.log(state.isDarkMode);
+  useEffect(() => {
+    document.body.classList.toggle('darkMode', state.isDarkMode);
+  }, [state.isDarkMode]);
 
   return (
     <AppContext.Provider

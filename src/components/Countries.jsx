@@ -16,52 +16,33 @@ const Countries = () => {
   });
 
   const optionStyles = {
-    control: (baseStyles, _state) => ({
+    control: (baseStyles, state) => ({
       ...baseStyles,
       width: '60%',
       marginTop: '2rem',
       paddingLeft: '.5rem',
-      background: isDarkMode ? '#2b3945' : '#ffffff',
-      borderColor: 'transparent',
+      background: isDarkMode ? '#2b3945' : '#fff',
+      border: state.isFocused ? '2px solid #2684ff' : 'transparent',
       boxShadow: '0 1px 2px 1px rgba(0,0,0,0.2)',
     }),
-    singleValue: (baseStyles, state) => ({
+    input: (baseStyles, _) => ({
       ...baseStyles,
-      color: isDarkMode ? '#9e9e9e' : '',
+      color: isDarkMode ? '#fff' : undefined,
     }),
-    menu: (baseStyles, _state) => ({
+    singleValue: (baseStyles, _) => ({
+      ...baseStyles,
+      color: isDarkMode ? '#fff' : '9e9e9e',
+    }),
+    menu: (baseStyles, _) => ({
       ...baseStyles,
       width: '60%',
       padding: '.75rem .5rem',
-      background: isDarkMode ? '#2b3945' : '#ffffff',
+      color: isDarkMode ? '#fff' : undefined,
+      background: isDarkMode ? '#2b3945' : '#fff',
     }),
     option: (baseStyles, state) => ({
       ...baseStyles,
-      background: state.isSelected
-        ? `${
-            isDarkMode
-              ? `${state.isSelected ? '#2684ff' : '#2b3945'}`
-              : `${state.isSelected ? '#2684ff' : '#2684ff'}`
-          }`
-        : state.isFocused
-        ? `${
-            isDarkMode
-              ? `${state.isFocused ? '#deebff' : ''}`
-              : `${state.isFocused ? '#deebff' : '#fff'}`
-          }`
-        : isDarkMode
-        ? '#2b3945'
-        : '#fff',
-      color: isDarkMode
-        ? `${state.isFocused ? '#333' : ''}`
-        : `${state.isFocused ? '#333' : ''}`,
-
-      // background: isDarkMode
-      //   ? `${state.isSelected ? '#2684ff' : '#2b3945'}`
-      //   : `${state.isSelected ? '#2684ff' : '#2684ff'}`,
-      // backgroundColor: isDarkMode
-      //   ? `${state.isFocused ? '#f0f0f0' : ''}`
-      //   : `${state.isFocused ? '#deebff' : '#fff'}`,
+      color: state.isFocused ? '#333' : undefined,
     }),
   };
   return (
@@ -72,7 +53,7 @@ const Countries = () => {
         components={{ Placeholder: CustomPlaceholder }}
         styles={optionStyles}
         className='region-select'
-        onChange={(option) => regionFilter(option.value)}
+        onChange={(e) => regionFilter(e.value)}
       />
       <Country />
     </section>

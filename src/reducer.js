@@ -53,8 +53,10 @@ const reducer = (state, action) => {
   }
   // Toggles the application theme
   if (action.type === TOGGLE_THEME) {
-    const isDarkTheme = state.isDarkMode;
-    return { ...state, isDarkMode: !isDarkTheme };
+    const newDarkMode = !state.isDarkMode;
+    console.log(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode);
+    return { ...state, isDarkMode: newDarkMode };
   }
   throw new Error(`No matching action type: ${action.type}`);
 };
