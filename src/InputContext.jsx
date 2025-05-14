@@ -1,20 +1,19 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 import { useGlobalContext } from './context';
 import reducer from './reducer';
-import { SET_INPUT, FORM_SUBMIT, SET_DATA } from './action';
+import { SET_INPUT, SEARCH_TERM } from './action';
 
 const initialState = {
   input: '',
-  searchedCountry: [],
+  searchTerm: '',
 };
-const InputContext = createContext();
+export const FormContext = createContext();
 
 const InputProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { countries, data, dispatch: appDispatch } = useGlobalContext();
 
-  // Updates input
-  const handleInput = (e) => {
+  // Get searchTerm
+  const handleSearch = (e) => {
     dispatch({ type: SET_INPUT, payload: { e } });
   };
 
@@ -23,23 +22,18 @@ const InputProvider = ({ children }) => {
     e.preventDefault();
 
     if (!state.input.trim()) return;
-    dispatch({ type: FORM_SUBMIT, payload: { data } });
+    dispatch({ type: SEARCH_TERM });
   };
 
-  useEffect(() => {
-    appDispatch({
-      type: SET_DATA,
-      payload: { searchedCountry: state.searchedCountry, data },
-    });
-  }, [state.searchedCountry, appDispatch]);
-
   return (
-    <InputContext.Provider value={{ ...state, handleInput, handleSubmit }}>
+    <FormContext.Provider
+      value={{ state, handleSearch, handleSubmit, dispatch }}
+    >
       {children}
-    </InputContext.Provider>
+    </FormContext.Provider>
   );
 };
 export default InputProvider;
 
 // Custom hook
-export const useInputContext = () => useContext(InputContext);
+export const useFormContext = () => useContext(FormContext);

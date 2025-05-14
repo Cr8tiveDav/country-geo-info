@@ -1,11 +1,19 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import reducer from './reducer';
-import data from './data';
+import { customFetch } from './customFetch';
+import { useQuery } from '@tanstack/react-query';
 import {
   TOGGLE_THEME,
-  FILTER_REGION,
   COUNTRY_DETAILS,
   CLOSE_DETAILS,
+  FETCH_SUCCESS,
+  FILTER_REGION,
 } from './action';
 
 // Get browser's preferred/locally stored theme
@@ -23,12 +31,16 @@ const getInitialDarkMode = () => {
 
 const initialState = {
   isDarkMode: false,
-  data: data,
-  countries: data,
+  fetchedCountries: [],
+  countries: [],
   countryDetails: {},
   isCardOpen: false,
+  isError: null,
 };
-const AppContext = createContext();
+
+export const AppContext = createContext();
+// Custom hook
+export const useGlobalContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(
@@ -40,26 +52,43 @@ const AppProvider = ({ children }) => {
     })
   );
 
-  // Filters country by region
-  const regionFilter = (value) => {
+  // Fetch data using react-query and axios
+  const { isPending, isError, data } = useQuery({
+    queryKey: ['countries'],
+    queryFn: async () => {
+      const { data } = await customFetch('/all');
+      // console.log(data);
+      return data;
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      dispatch({ type: FETCH_SUCCESS, payload: { data } });
+    }
+  }, [data]);
+
+  // Filter country by region
+  const filterRegion = (value) => {
     dispatch({ type: FILTER_REGION, payload: { value } });
   };
 
-  // Displays country details
+  // Display country details
   const displayCountryDetails = (name) => {
     dispatch({ type: COUNTRY_DETAILS, payload: { name } });
   };
 
-  // Closes country details
+  // Close country details
   const closeCountryDetails = () => {
     dispatch({ type: CLOSE_DETAILS });
   };
 
   // Toggles theme mode
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     dispatch({ type: TOGGLE_THEME });
-  };
+  }, [dispatch]);
 
+  // Toggle dark mode class when dark mode state changes
   useEffect(() => {
     document.body.classList.toggle('darkMode', state.isDarkMode);
   }, [state.isDarkMode]);
@@ -67,9 +96,10 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        ...state,
+        state,
         dispatch,
-        regionFilter,
+        isPending,
+        filterRegion,
         displayCountryDetails,
         closeCountryDetails,
         toggleTheme,
@@ -80,6 +110,3 @@ const AppProvider = ({ children }) => {
   );
 };
 export default AppProvider;
-
-// Custom hook
-export const useGlobalContext = () => useContext(AppContext);

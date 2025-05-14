@@ -1,26 +1,35 @@
 import { FaArrowLeftLong } from 'react-icons/fa6';
-import { useGlobalContext } from '../context';
 import { nanoid } from 'nanoid';
+import { useCountriesData, useCountryDetails } from '../customHooks';
 
 const CountryDetails = () => {
+  const { fetchedCountries } = useCountriesData();
   const { isCardOpen, countryDetails, closeCountryDetails } =
-    useGlobalContext();
+    useCountryDetails();
 
   const {
-    flags: { svg },
+    flags,
     name,
-    nativeName,
     population,
     region,
     subregion,
     capital,
-    topLevelDomain,
+    tld,
     currencies,
     languages,
     borders,
   } = countryDetails;
 
-  const { name: currency } = currencies[0];
+  const nativeNameKey = Object.keys(name?.nativeName)?.[0];
+  const nativeNameValue = name?.nativeName?.[nativeNameKey]?.common;
+
+  const currencyKey = Object.keys(currencies);
+  const currency = currencies?.[currencyKey]?.name;
+
+  const languageKeys = Object.keys(languages);
+  const languageValues = languageKeys.map((language) => {
+    return languages?.[language];
+  });
 
   return (
     <>
@@ -36,12 +45,12 @@ const CountryDetails = () => {
               back
             </button>
 
-            <img src={svg} alt={name} />
+            <img src={flags?.svg} alt={name?.common} />
 
             <div className='content'>
-              <h4>{name}</h4>
+              <h4>{name?.common}</h4>
               <p>
-                <strong>native name:</strong> <span>{nativeName}</span>
+                <strong>native name:</strong> <span>{nativeNameValue}</span>
               </p>
               <p>
                 <strong>population:</strong>{' '}
@@ -54,11 +63,12 @@ const CountryDetails = () => {
                 <strong>sub region:</strong> <span>{subregion}</span>
               </p>
               <p style={{ marginBottom: '2rem' }}>
-                <strong>capital:</strong> <span>{capital}</span>
+                <strong>capital:</strong> <span>{capital?.[0]}</span>
               </p>
 
               <p>
-                <strong>top level domain:</strong> <span>{topLevelDomain}</span>
+                <strong>top level domain:</strong>{' '}
+                <span style={{ textTransform: 'lowercase' }}>{tld?.[0]}</span>
               </p>
               <p>
                 <strong>currencies:</strong> <span>{currency}</span>
@@ -66,13 +76,12 @@ const CountryDetails = () => {
 
               <p style={{ marginBottom: '2rem' }}>
                 <strong>languages:</strong>
-                {languages.map((language, index) => {
-                  const { name } = language;
+                {languageValues.map((language, index) => {
                   return (
                     <span key={nanoid()}>
                       {' '}
-                      {name}
-                      {index < languages.length - 1 && ','}
+                      {language}
+                      {index < languageValues.length - 1 && ','}
                     </span>
                   );
                 })}
@@ -84,16 +93,25 @@ const CountryDetails = () => {
                 </p>
                 <div className='borders ' style={{ marginTop: '1rem' }}>
                   {borders?.map((border) => {
+                    const match = fetchedCountries.find((country) => {
+                      return country.cca3 === border;
+                    });
                     return (
                       <button
                         type='button'
                         className='details-btn'
                         key={nanoid()}
                       >
-                        {border}
+                        {match?.name?.common}
                       </button>
                     );
                   }) || 'None'}
+
+                  {/* {borders?.map((border) => {
+                    return (
+
+                    );
+                  }) } */}
                 </div>
               </section>
             </div>

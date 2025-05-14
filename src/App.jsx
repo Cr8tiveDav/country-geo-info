@@ -1,19 +1,23 @@
+import { ToastContainer } from 'react-toastify';
 import Countries from './components/Countries';
+import Country from './components/Country';
 import CountryDetails from './components/CountryDetails';
 import Navbar from './components/Navbar';
-import { useGlobalContext } from './context';
+import { useCountryDetails } from './customHooks';
 
 const App = () => {
-  const { isCardOpen } = useGlobalContext();
+  const { isCardOpen } = useCountryDetails();
   return (
     <>
       <header>
         <Navbar />
       </header>
       <main>
-        {!isCardOpen && <Countries />}
+        <Countries />
         {isCardOpen && <CountryDetails />}
+        {!isCardOpen && <Country />}
       </main>
+      <ToastContainer position='top-center' />
     </>
   );
 };

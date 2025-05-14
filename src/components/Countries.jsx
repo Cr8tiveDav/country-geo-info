@@ -1,16 +1,19 @@
 import Select, { components } from 'react-select';
-import data from '../data';
-import Country from './Country';
 import SearchBar from './SearchBar';
 import { useGlobalContext } from '../context';
+import { useQuery } from '@tanstack/react-query';
+import { customFetch } from '../customFetch';
+import { useFormContext } from '../InputContext';
+import { useEffect } from 'react';
+import { FILTER_REGION } from '../action';
+import { useCountriesData, useDarkMode } from '../customHooks';
 
 const Countries = () => {
-  const { isDarkMode, regionFilter } = useGlobalContext();
-  const region = data.map((country) => {
-    const { region: countryRegion } = country;
-    return countryRegion;
-  });
-  const uniqueRegion = [...new Set(region)];
+  const { fetchedCountries, filterRegion } = useCountriesData();
+  const { isDarkMode } = useDarkMode();
+
+  const regions = fetchedCountries.map((country) => country.region);
+  const uniqueRegion = [...new Set(regions)];
   const options = uniqueRegion.map((region) => {
     return { value: region, label: region };
   });
@@ -53,9 +56,8 @@ const Countries = () => {
         components={{ Placeholder: CustomPlaceholder }}
         styles={optionStyles}
         className='region-select'
-        onChange={(e) => regionFilter(e.value)}
+        onChange={(e) => filterRegion(e.value)}
       />
-      <Country />
     </section>
   );
 };

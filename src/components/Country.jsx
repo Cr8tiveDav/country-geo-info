@@ -1,30 +1,27 @@
 import { memo } from 'react';
 import { nanoid } from 'nanoid';
-import { useGlobalContext } from '../context';
+import { useCountriesData } from '../customHooks';
 
 const Country = () => {
-  const { countries, displayCountryDetails } = useGlobalContext();
+  const { isPending, countries, displayCountryDetails } = useCountriesData();
 
+  if (isPending) {
+    return <div className='loading'></div>;
+  }
   return (
     <>
       {countries.map((country) => {
-        const {
-          flags: { svg },
-          name,
-          population,
-          region,
-          capital,
-        } = country;
+        const { flags, name, population, region, capital } = country;
 
         return (
           <article
             className='card'
             key={nanoid()}
-            onClick={() => displayCountryDetails(name)}
+            onClick={() => displayCountryDetails(name?.common)}
           >
-            <img src={svg} alt='' className='img' />
+            <img src={flags?.png} alt='' className='img' />
             <div className='content'>
-              <h4>{name}</h4>
+              <h4>{name?.common}</h4>
               <p>
                 <strong>population:</strong>{' '}
                 <span>{population.toLocaleString()}</span>
@@ -34,7 +31,7 @@ const Country = () => {
               </p>
               <p>
                 <strong>capital:</strong>{' '}
-                <span>{capital ?? 'Not Available'}</span>
+                <span>{capital?.[0] ?? 'Not Available'}</span>
               </p>
             </div>
           </article>

@@ -6,6 +6,9 @@ import {
   FILTER_REGION,
   COUNTRY_DETAILS,
   CLOSE_DETAILS,
+  FETCH_SUCCESS,
+  SEARCH_TERM,
+  SEARCH_RESULT,
 } from './action';
 
 const reducer = (state, action) => {
@@ -13,44 +16,53 @@ const reducer = (state, action) => {
     const value = action.payload.e.target.value;
     return { ...state, input: value };
   }
-  // Submits form input
-  if (action.type === FORM_SUBMIT) {
-    const submittedValue = state.input.trim();
-    const countries = action.payload.data;
-    const searchResult = countries.find(
-      (country) => country.name === submittedValue
-    );
-    return { ...state, input: '', searchedCountry: [searchResult] };
+
+  // Set search term
+  if (action.type === SEARCH_TERM) {
+    const inputValue = state.input.toLowerCase();
+    return { ...state, searchTerm: inputValue, input: '' };
   }
-  // Searches and sets country
-  if (action.type === SET_DATA) {
-    const searchedItem = action.payload.searchedCountry;
-    // Checks if searched item is > 0, else default to data
-    const result = searchedItem.length > 0 ? searchedItem : action.payload.data;
+
+  // Set search result
+  if (action.type === SEARCH_RESULT) {
+    const result = action.payload.data;
+    console.log(result);
     return { ...state, countries: result };
   }
-  // Filters countries by region
+
+  // Fetch data
+  if (action.type === FETCH_SUCCESS) {
+    const data = action.payload.data;
+    const constantData = action.payload.data;
+    return { ...state, countries: data, fetchedCountries: constantData };
+  }
+
+  // Filter country by region
   if (action.type === FILTER_REGION) {
-    const data = state.data;
-    const region = action.payload.value;
-    const countriesByRegion = data.filter(
-      (country) => country.region === region
+    const regionValue = action.payload.value;
+    const countriesByRegion = state.fetchedCountries.filter(
+      (country) => country.region === regionValue
     );
+    console.log(countriesByRegion);
     return { ...state, countries: countriesByRegion };
   }
+
   // Displays country's details
   if (action.type === COUNTRY_DETAILS) {
     // Fetches country's obj by the name
-    const countryItem = state.data.find(
-      (country) => country.name === action.payload.name
+    const countryItem = state.countries.find(
+      (country) => country?.name?.common === action.payload.name
     );
+    console.log(countryItem);
     return { ...state, isCardOpen: true, countryDetails: countryItem };
   }
+
   // Close country's details
   if (action.type === CLOSE_DETAILS) {
     // Closes country's and route back to home
     return { ...state, isCardOpen: false };
   }
+
   // Toggles the application theme
   if (action.type === TOGGLE_THEME) {
     const newDarkMode = !state.isDarkMode;
