@@ -112,7 +112,7 @@ html {
 }
 .darkMode .nav-container,
 .darkMode .search-input,
-.darkMode .card .content {
+.darkMode .card .card-align {
   background: var(--dark-blue);
   color: var(--white);
 }
@@ -394,13 +394,14 @@ main {
 Countries
 ===============
 */
-.countries-container {
+.form-container {
   width: var(--view-width);
   margin: 0 auto;
   position: relative;
 }
 form {
-  margin-top: 2.5rem;
+  width: 100%;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
 }
@@ -412,7 +413,7 @@ form svg {
 }
 .search-input {
   width: 100%;
-  padding: 1.3rem 4rem;
+  padding: 0.88rem 4rem;
   font-size: 1rem;
   color: var(--dark-gray);
   background: var(--white);
@@ -430,22 +431,50 @@ form svg {
   color: var(--light-gray);
 }
 
+.region-select__control {
+  width: 14rem;
+  height: 100%;
+}
+.region-select__value-container {
+  cursor: text;
+}
+.region-select__value-container:hover {
+  opacity: 0.8;
+}
+
 /*
     ===============
     Country
     ===============
-    */
-.card {
-  width: 250px;
+*/
+.countries-container {
+  width: var(--view-width);
   margin: 0 auto;
   margin-top: 2rem;
+  padding-bottom: 2rem;
+  display: grid;
+  row-gap: 2rem;
+}
+.card {
+  width: 250px;
+  height: 100%;
+  margin: 0 auto;
   box-shadow: var(--shadow-2);
   border-radius: var(--borderRadius-md);
+  /* background: var(--backgroundColor); */
   cursor: pointer;
   transition: var(--transition);
 }
 .card:hover {
   transform: scale(1.02);
+}
+.card .card-align {
+  height: 100%;
+  color: var(--textColor);
+  background: var(--backgroundColor);
+  transition: var(--darkModeTransition);
+  border-bottom-left-radius: var(--borderRadius-md);
+  border-bottom-right-radius: var(--borderRadius-md);
 }
 .card .img {
   width: 100%;
@@ -455,11 +484,6 @@ form svg {
 }
 .card .content {
   padding: 2rem 1.5rem;
-  color: var(--textColor);
-  background: var(--backgroundColor);
-  transition: var(--darkModeTransition);
-  border-bottom-left-radius: var(--borderRadius-md);
-  border-bottom-right-radius: var(--borderRadius-md);
 }
 .card .content h4 {
   margin-bottom: 1rem;
@@ -470,6 +494,76 @@ form svg {
 }
 .card .content p:nth-of-type(-n + 2) {
   margin-bottom: 0.75rem;
+}
+
+/*
+    ======================
+    Device Responsiveness
+    ======================
+*/
+/* Mobile (Large) */
+@media (min-width: 594px) {
+  .form-container {
+    max-width: 580px;
+  }
+  .countries-container {
+    width: var(--view-width);
+  }
+  .countries-container {
+    max-width: 580px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet */
+@media (min-width: 914px) {
+  .countries-container {
+    max-width: 830px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .form-container {
+    max-width: 830px;
+    height: 48px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  form {
+    width: 20rem;
+  }
+  .region-container {
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    position: absolute;
+    right: 0;
+  }
+}
+
+/* Laptop & Desktop */
+@media (min-width: 1222px) {
+  .nav-center {
+    max-width: var(--max-width);
+  }
+  .countries-container {
+    max-width: 1107px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .form-container {
+    max-width: 1107px;
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  form {
+    width: 25rem;
+  }
 }
 
 /*

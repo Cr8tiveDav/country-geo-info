@@ -1,4 +1,4 @@
-import Select, { components } from 'react-select';
+import Select from 'react-select';
 import SearchBar from './SearchBar';
 import { useGlobalContext } from '../context';
 import { useQuery } from '@tanstack/react-query';
@@ -12,17 +12,11 @@ const Countries = () => {
   const { fetchedCountries, filterRegion } = useCountriesData();
   const { isDarkMode } = useDarkMode();
 
-  const regions = fetchedCountries.map((country) => country.region);
-  const uniqueRegion = [...new Set(regions)];
-  const options = uniqueRegion.map((region) => {
-    return { value: region, label: region };
-  });
-
   const optionStyles = {
     control: (baseStyles, state) => ({
       ...baseStyles,
-      width: '60%',
-      marginTop: '2rem',
+      // width: '60%',
+      // marginTop: '2rem',
       paddingLeft: '.5rem',
       background: isDarkMode ? '#2b3945' : '#fff',
       border: state.isFocused ? '2px solid #2684ff' : 'transparent',
@@ -38,7 +32,7 @@ const Countries = () => {
     }),
     menu: (baseStyles, _) => ({
       ...baseStyles,
-      width: '60%',
+      // width: '60%',
       padding: '.75rem .5rem',
       color: isDarkMode ? '#fff' : undefined,
       background: isDarkMode ? '#2b3945' : '#fff',
@@ -46,27 +40,31 @@ const Countries = () => {
     option: (baseStyles, state) => ({
       ...baseStyles,
       color: state.isFocused ? '#333' : undefined,
+      cursor: 'pointer',
     }),
   };
+
+  const regions = fetchedCountries.map((country) => country.region);
+  const uniqueRegion = [...new Set(regions)];
+  // React select options
+  // Create an object key-value pairs of value and label
+  const options = uniqueRegion.map((region) => ({
+    value: region,
+    label: region,
+  }));
+
   return (
-    <section className='countries-container'>
+    <section className='form-container'>
       <SearchBar />
       <Select
         options={options}
-        components={{ Placeholder: CustomPlaceholder }}
+        placeholder='Filter by Region'
         styles={optionStyles}
-        className='region-select'
+        className='region-container'
+        classNamePrefix='region-select'
         onChange={(e) => filterRegion(e.value)}
       />
     </section>
   );
 };
 export default Countries;
-
-export const CustomPlaceholder = (props) => {
-  return (
-    <components.Placeholder {...props}>
-      <span>Filter by Region</span>
-    </components.Placeholder>
-  );
-};
