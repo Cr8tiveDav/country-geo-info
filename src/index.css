@@ -430,10 +430,16 @@ form svg {
   font-size: 1rem;
   color: var(--light-gray);
 }
+.search-input:hover {
+  opacity: 0.8;
+}
 
 .region-select__control {
   width: 14rem;
   height: 100%;
+}
+.region-select__menu {
+  max-width: 14rem;
 }
 .region-select__value-container {
   cursor: text;
@@ -534,13 +540,6 @@ form svg {
   }
   form {
     width: 20rem;
-  }
-  .region-container {
-    height: 100%;
-    display: flex;
-    justify-content: right;
-    position: absolute;
-    right: 0;
   }
 }
 
