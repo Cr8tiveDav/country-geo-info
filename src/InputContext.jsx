@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
-import { useGlobalContext } from './context';
+import { createContext, useContext, useReducer } from 'react';
 import reducer from './reducer';
 import { SET_INPUT, SEARCH_TERM } from './action';
 

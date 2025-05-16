@@ -39,81 +39,87 @@ const CountryDetails = () => {
             <button
               type='button'
               onClick={closeCountryDetails}
-              className='details-btn back-btn'
+              className='details-btn close-btn'
             >
               <FaArrowLeftLong />
               back
             </button>
+            <div className='details'>
+              <img src={flags?.svg} alt={name?.common} className='img' />
 
-            <img src={flags?.svg} alt={name?.common} />
+              <div className='content'>
+                <h4>{name?.common}</h4>
 
-            <div className='content'>
-              <h4>{name?.common}</h4>
-              <p>
-                <strong>native name:</strong> <span>{nativeNameValue}</span>
-              </p>
-              <p>
-                <strong>population:</strong>{' '}
-                <span>{population.toLocaleString()}</span>
-              </p>
-              <p>
-                <strong>region:</strong> <span>{region}</span>
-              </p>
-              <p>
-                <strong>sub region:</strong> <span>{subregion}</span>
-              </p>
-              <p style={{ marginBottom: '2rem' }}>
-                <strong>capital:</strong> <span>{capital?.[0]}</span>
-              </p>
+                <div className='content-row'>
+                  <p>
+                    <strong>native name:</strong> <span>{nativeNameValue}</span>
+                  </p>
+                  <p>
+                    <strong>population:</strong>{' '}
+                    <span>{population.toLocaleString()}</span>
+                  </p>
+                  <p>
+                    <strong>region:</strong> <span>{region}</span>
+                  </p>
+                  <p>
+                    <strong>sub region:</strong> <span>{subregion}</span>
+                  </p>
+                  <p className='para-divider'>
+                    <strong>capital:</strong> <span>{capital?.[0]}</span>
+                  </p>
 
-              <p>
-                <strong>top level domain:</strong>{' '}
-                <span style={{ textTransform: 'lowercase' }}>{tld?.[0]}</span>
-              </p>
-              <p>
-                <strong>currencies:</strong> <span>{currency}</span>
-              </p>
-
-              <p style={{ marginBottom: '2rem' }}>
-                <strong>languages:</strong>
-                {languageValues.map((language, index) => {
-                  return (
-                    <span key={nanoid()}>
-                      {' '}
-                      {language}
-                      {index < languageValues.length - 1 && ','}
+                  <p>
+                    <strong>top level domain:</strong>{' '}
+                    <span style={{ textTransform: 'lowercase' }}>
+                      {tld?.[0]}
                     </span>
-                  );
-                })}
-              </p>
+                  </p>
+                  <p>
+                    <strong>currencies:</strong> <span>{currency}</span>
+                  </p>
 
-              <section className='border-container'>
-                <p>
-                  <strong>border countries:</strong>
-                </p>
-                <div className='borders ' style={{ marginTop: '1rem' }}>
-                  {borders?.map((border) => {
-                    const match = fetchedCountries.find((country) => {
-                      return country.cca3 === border;
-                    });
-                    return (
-                      <button
-                        type='button'
-                        className='details-btn'
-                        key={nanoid()}
-                      >
-                        {match?.name?.common}
-                      </button>
-                    );
-                  }) || 'None'}
-
-                  {/* {borders?.map((border) => {
-                    return (
-
-                    );
-                  }) } */}
+                  <p className='para-divider'>
+                    <strong>languages:</strong>
+                    {languageValues.map((language, index) => {
+                      return (
+                        <span key={nanoid()}>
+                          {' '}
+                          {language}
+                          {index < languageValues.length - 1 && ','}
+                        </span>
+                      );
+                    })}
+                  </p>
                 </div>
-              </section>
+
+                <section className='border-container'>
+                  <p>
+                    <strong>border countries:</strong>
+                  </p>
+                  <div className='borders ' style={{ marginTop: '1rem' }}>
+                    {borders?.map((border) => {
+                      const match = fetchedCountries.find((country) => {
+                        return country.cca3 === border;
+                      });
+                      return (
+                        <button
+                          type='button'
+                          className='details-btn'
+                          key={nanoid()}
+                        >
+                          {match?.name?.common}
+                        </button>
+                      );
+                    }) || 'None'}
+
+                    {/* {borders?.map((border) => {
+                    return (
+
+                    );
+                    }) } */}
+                  </div>
+                </section>
+              </div>
             </div>
           </article>
         </section>

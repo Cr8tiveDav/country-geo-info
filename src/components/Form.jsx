@@ -1,22 +1,14 @@
 import Select from 'react-select';
 import SearchBar from './SearchBar';
-import { useGlobalContext } from '../context';
-import { useQuery } from '@tanstack/react-query';
-import { customFetch } from '../customFetch';
-import { useFormContext } from '../InputContext';
-import { useEffect } from 'react';
-import { FILTER_REGION } from '../action';
 import { useCountriesData, useDarkMode } from '../customHooks';
 
-const Countries = () => {
+const Form = () => {
   const { fetchedCountries, filterRegion } = useCountriesData();
   const { isDarkMode } = useDarkMode();
 
   const optionStyles = {
     control: (baseStyles, state) => ({
       ...baseStyles,
-      // width: '60%',
-      // marginTop: '2rem',
       paddingLeft: '.5rem',
       background: isDarkMode ? '#2b3945' : '#fff',
       border: state.isFocused ? '2px solid #2684ff' : 'transparent',
@@ -32,7 +24,6 @@ const Countries = () => {
     }),
     menu: (baseStyles, _) => ({
       ...baseStyles,
-      // width: '60%',
       padding: '.75rem .5rem',
       color: isDarkMode ? '#fff' : undefined,
       background: isDarkMode ? '#2b3945' : '#fff',
@@ -67,4 +58,4 @@ const Countries = () => {
     </section>
   );
 };
-export default Countries;
+export default Form;

@@ -20,7 +20,7 @@ const Country = () => {
             onClick={() => displayCountryDetails(name?.common)}
           >
             <div className='card-align'>
-              <img src={flags?.png} alt='' className='img' />
+              <img src={flags?.png} alt={flags?.alt} className='img' />
               <div className='content'>
                 <h4>{name?.common}</h4>
                 <p>

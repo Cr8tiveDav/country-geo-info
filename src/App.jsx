@@ -1,8 +1,8 @@
 import { ToastContainer } from 'react-toastify';
-import Countries from './components/Countries';
+import Navbar from './components/Navbar';
+import Form from './components/Form';
 import Country from './components/Country';
 import CountryDetails from './components/CountryDetails';
-import Navbar from './components/Navbar';
 import { useCountryDetails } from './customHooks';
 
 const App = () => {
@@ -13,9 +13,9 @@ const App = () => {
         <Navbar />
       </header>
       <main>
-        <Countries />
-        {isCardOpen && <CountryDetails />}
+        <Form />
         {!isCardOpen && <Country />}
+        {isCardOpen && <CountryDetails />}
       </main>
       <ToastContainer position='top-center' />
     </>
