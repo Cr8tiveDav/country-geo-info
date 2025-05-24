@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
-    // Remove console logs or debugger from production
+    // Remove console logs/debugger from production
     esbuild: {
       drop: mode === 'production' ? ['console', 'debugger'] : [],
     },
