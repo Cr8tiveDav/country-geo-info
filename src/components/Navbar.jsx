@@ -1,10 +1,8 @@
 import { MdOutlineLightMode } from 'react-icons/md';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { memo } from 'react';
-import { useDarkMode } from '../customHooks';
 
-const Navbar = () => {
-  const { isDarkMode, toggleTheme } = useDarkMode();
+const Navbar = ({ isDarkMode, toggleTheme }) => {
   return (
     <nav className='nav-container'>
       <div className='nav-center'>
