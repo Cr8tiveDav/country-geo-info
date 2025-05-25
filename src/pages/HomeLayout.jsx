@@ -8,18 +8,15 @@ const getInitialDarkMode = () => {
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme:dark)'
   ).matches;
-  console.log(`prefers dark mode: ${prefersDarkMode}`);
 
   // Get the value of dark theme from local storage
   // Compare if it's ==='true'. Returns a boolean
   const storedDarkMode = localStorage.getItem('darkMode') === 'true';
-  console.log(`stored dark mode: ${storedDarkMode}`);
   return storedDarkMode || prefersDarkMode;
 };
 
 const HomeLayout = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => getInitialDarkMode());
-  console.log(isDarkMode);
   const navigation = useNavigation();
   const isPageLoading = navigation.state === 'loading';
 
