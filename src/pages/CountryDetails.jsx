@@ -5,7 +5,6 @@ import { customFetch } from '../customFetch';
 import { nanoid } from 'nanoid';
 
 export const loader = async ({ params }) => {
-  console.log(params);
   const { code } = params; // Get country cca3 code from loader params
   const { data } = await customFetch(`/alpha/${code}`);
   const { data: countries } = await customFetch('/all');
@@ -14,10 +13,8 @@ export const loader = async ({ params }) => {
 
 const CountryDetails = () => {
   const { data, countries } = useLoaderData();
-  console.log(data);
 
   const country = data[0];
-  console.log(country);
 
   const {
     flags,
@@ -31,7 +28,6 @@ const CountryDetails = () => {
     languages,
     borders,
   } = country;
-  console.log(flags);
 
   const nativeNameKey = Object.keys(name?.nativeName)?.[0];
   const nativeNameValue = name?.nativeName?.[nativeNameKey]?.common;
