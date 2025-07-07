@@ -59,7 +59,7 @@ const PaginationContainer = ({ countries }) => {
           key='dots-1'
           className='page-btn'
           style={{
-            width: '2.5rem',
+            width: '2rem',
             height: '2rem',
             border: 'none',
             background: 'transparent',
@@ -85,7 +85,7 @@ const PaginationContainer = ({ countries }) => {
           key='dots-2'
           className='page-btn'
           style={{
-            width: '2.5rem',
+            width: '2rem',
             height: '2rem',
             border: 'none',
             background: 'transparent',
@@ -155,6 +155,13 @@ const Wrapper = styled.section`
   }
   .page-btns {
     display: flex;
-    column-gap: 0.5rem;
+    column-gap: 0.2rem;
+  }
+
+  /* Tablet and above */
+  @media (min-width: 914px) {
+    .page-btns {
+      column-gap: 0.5rem;
+    }
   }
 `;
