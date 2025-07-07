@@ -112,7 +112,8 @@ html {
 }
 .darkMode .nav-container,
 .darkMode .search-input,
-.darkMode .card .card-align {
+.darkMode .card .card-align,
+.darkMode .page-btn {
   background: var(--dark-blue);
   color: var(--white);
 }
@@ -461,6 +462,19 @@ Forms
 }
 .card .content p:nth-of-type(-n + 2) {
   margin-bottom: 0.75rem;
+}
+
+/*
+    ===============
+    Countries
+    ===============
+*/
+.transparent-btn,
+.page-btns,
+.prev-btn,
+.next-btn {
+  background: transparent;
+  color: var(--textColor);
 }
 
 /*

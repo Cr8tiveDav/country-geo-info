@@ -7,13 +7,13 @@ import { nanoid } from 'nanoid';
 export const loader = async ({ params }) => {
   const { code } = params; // Get country cca3 code from loader params
   const { data } = await customFetch(`/alpha/${code}`);
-  const { data: countries } = await customFetch('/all');
+  const { data: countries } = await customFetch('/all?fields=name,cca3');
   return { code, data, countries };
 };
 
 const CountryDetails = () => {
   const { data, countries } = useLoaderData();
-
+  console.log(countries);
   const country = data[0];
 
   const {

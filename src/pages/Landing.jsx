@@ -7,13 +7,14 @@ import { useState } from 'react';
 
 const searchCountriesQuery = ({ searchTerm, selectedRegion }) => {
   // let endpoint = searchTerm ? `/name/${searchTerm}` : `/all`;
-  let endpoint = '/all';
+  let endpoint = '/all?fields=flags,name,population,region,capital,cca3,';
   if (searchTerm) endpoint = `/name/${searchTerm}`;
   if (selectedRegion) endpoint = `/region/${selectedRegion}`;
   return {
-    queryKey: ['search', { searchTerm, selectedRegion }],
+    queryKey: ['search', searchTerm, selectedRegion],
     queryFn: async () => {
       const { data } = await customFetch.get(`${endpoint}`);
+      console.log(data);
       return data;
     },
   };

@@ -1,4 +1,5 @@
 import CountryCard from './CountryCard';
+import PaginationContainer from './PaginationContainer';
 
 const CountryList = ({ countries, dataPending }) => {
   // console.log(countries);
@@ -20,11 +21,9 @@ const CountryList = ({ countries, dataPending }) => {
     );
   }
   return (
-    <section className='countries-container'>
-      {countries.map((country) => {
-        return <CountryCard {...country} key={country.cca3} />;
-      })}
-    </section>
+    <>
+      <PaginationContainer countries={countries} />
+    </>
   );
 };
 export default CountryList;

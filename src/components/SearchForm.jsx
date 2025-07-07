@@ -8,7 +8,7 @@ const fetchCountries = () => {
   return {
     queryKey: ['countries'],
     queryFn: async () => {
-      const { data } = await customFetch.get('/all');
+      const { data } = await customFetch.get('/all?fields=name,region');
       return data;
     },
   };

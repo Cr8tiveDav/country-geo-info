@@ -3,13 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CountryCard = ({ flags, name, cca3, population, region, capital }) => {
   return (
-    <Link
-      to={`/country/${cca3}`}
-      // to='/details'
-      className='card'
-      key={nanoid()}
-      // onClick={}
-    >
+    <Link to={`/country/${cca3}`} className='card' key={nanoid()}>
       <div className='card-align'>
         <img src={flags?.png} alt={flags?.alt} className='img' />
         <div className='content'>
