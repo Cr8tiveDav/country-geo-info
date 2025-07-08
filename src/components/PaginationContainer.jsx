@@ -109,6 +109,9 @@ const PaginationContainer = ({ countries }) => {
 
   return (
     <>
+      <section className='total-countries'>
+        <h5>Countries: {totalItems}</h5>
+      </section>
       <section className='countries-container'>
         {data.map((country) => {
           return <CountryCard {...country} key={country.cca3} />;

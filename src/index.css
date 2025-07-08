@@ -415,10 +415,19 @@ Forms
     Countries
     ===============
 */
+.total-countries {
+  width: 80vw;
+  max-width: 1107px;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+.total-countries h5 {
+  color: var(--textColor);
+}
 .countries-container {
   width: var(--view-width);
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 1.3rem;
   padding-bottom: 2rem;
   display: grid;
   row-gap: 2rem;
@@ -627,6 +636,9 @@ Country Details
 
 /* Table & Desktop */
 @media (min-width: 914px) {
+  .search-input {
+    width: 350px;
+  }
   .details-center .details {
     max-width: var(--max-width);
     display: grid;
